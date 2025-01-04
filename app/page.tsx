@@ -192,7 +192,33 @@ export default function AluminumExtrusionCalculator() {
               <Plus className="h-4 w-4 mr-2" /> Add Cut
             </Button>
           </div>
-
+          <div className="space-y-2 border border-gray-800 rounded p-4 font-mono">
+            <h2 className="text-lg text-gray-400 mb-3">Summary</h2>
+            {cuts.map((cut, index) => (
+              <p key={index} className="text-sm text-gray-300">
+                → {cut.length}mm cuts:{" "}
+                {cutPlans.reduce(
+                  (sum, plan) =>
+                    sum + plan.cuts.filter((c) => c === cut.length).length,
+                  0
+                )}{" "}
+                of {cut.quantity} needed
+              </p>
+            ))}
+            <div className="border-t border-gray-800 my-2" />
+            <p className="text-sm text-gray-300">
+              → Total cuts: {totalCutsMade} of {totalCutsNeeded} needed
+            </p>
+            <p className="text-sm text-gray-300">
+              → Total waste:{" "}
+              {cutPlans.reduce((sum, plan) => sum + plan.waste, 0)}mm
+            </p>
+            <p className="text-sm text-gray-300">
+              → Extrusions:{" "}
+              {cutPlans.filter((plan) => plan.cuts.length > 0).length} of{" "}
+              {numExtrusions} used
+            </p>
+          </div>
           <div className="space-y-4">
             <h2 className="text-lg text-gray-400">Cut Plan Visualization</h2>
             <div className="space-y-2">
@@ -225,34 +251,6 @@ export default function AluminumExtrusionCalculator() {
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="space-y-2 border border-gray-800 rounded p-4 font-mono">
-            <h2 className="text-lg text-gray-400 mb-3">Summary</h2>
-            {cuts.map((cut, index) => (
-              <p key={index} className="text-sm text-gray-300">
-                → {cut.length}mm cuts:{" "}
-                {cutPlans.reduce(
-                  (sum, plan) =>
-                    sum + plan.cuts.filter((c) => c === cut.length).length,
-                  0
-                )}{" "}
-                of {cut.quantity} needed
-              </p>
-            ))}
-            <div className="border-t border-gray-800 my-2" />
-            <p className="text-sm text-gray-300">
-              → Total cuts: {totalCutsMade} of {totalCutsNeeded} needed
-            </p>
-            <p className="text-sm text-gray-300">
-              → Total waste:{" "}
-              {cutPlans.reduce((sum, plan) => sum + plan.waste, 0)}mm
-            </p>
-            <p className="text-sm text-gray-300">
-              → Extrusions:{" "}
-              {cutPlans.filter((plan) => plan.cuts.length > 0).length} of{" "}
-              {numExtrusions} used
-            </p>
           </div>
         </div>
       </div>
