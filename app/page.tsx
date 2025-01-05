@@ -409,7 +409,7 @@ export default function AluminumExtrusionCalculator() {
                               }%`,
                             }}
                           >
-                            <div className="opacity-50 absolute">
+                            <div className="opacity-50 text-[8px] rotate-90  absolute">
                               {kerfWidth > 0 && `${kerfWidth}${kerfUnit}`}
                             </div>
                           </div>
